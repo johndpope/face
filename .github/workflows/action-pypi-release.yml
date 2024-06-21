@@ -31,7 +31,7 @@ runs:
   using: composite
   steps:
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
     - name: Install dependencies
@@ -41,7 +41,7 @@ runs:
         pip install build
     - name: Bump version and push tag
       id: tag_version
-      uses: mathieudutour/github-tag-action@v6.0
+      uses: mathieudutour/github-tag-action@v6.1
       with:
         github_token: ${{ inputs.github-token }}
         release_branches: trunk
@@ -51,12 +51,12 @@ runs:
       env:
         ReleaseVersion: ${{ steps.tag_version.outputs.new_tag }}
     - name: Publish package
-      uses: pypa/gh-action-pypi-publish@v1.5.1
+      uses: pypa/gh-action-pypi-publish@v1.8.5
       with:
         user: __token__
         password: ${{ inputs.pypi-token }}
     - name: Create a GitHub release
-      uses: ncipollo/release-action@v1.10.0
+      uses: ncipollo/release-action@v1.12.0
       with:
         tag: ${{ steps.tag_version.outputs.new_tag }}
         name: Release ${{ steps.tag_version.outputs.new_tag }}

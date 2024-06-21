@@ -1,5 +1,5 @@
 - name: Python Poetry Action
-  uses: abatilo/actions-poetry@v2.1.6
+  uses: abatilo/actions-poetry@v2.3.0
 
 name: CI
 on: pull_request
@@ -60,8 +60,8 @@ jobs:
         os: [ubuntu-18.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run image
@@ -102,7 +102,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@v3.4.0
+      - uses: amannn/action-semantic-pull-request@v5.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
